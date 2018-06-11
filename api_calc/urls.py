@@ -23,5 +23,5 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
     path('operations/', OperationListCreateAPIView.as_view()),
-    path('opertaions/<int:pk>', OperationRetrieveDestroyAPIView.as_view()),
+    path('operations/<int:pk>', OperationRetrieveDestroyAPIView.as_view()),
 ]

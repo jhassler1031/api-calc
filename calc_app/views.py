@@ -13,6 +13,23 @@ class OperationListCreateAPIView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner = self.request.user)
+        data = serializer.validated_data
+        calc_result = 0
+        operand_one = data["operand_one"]
+        operand_two = data["operand_two"]
+        operator = data["operator"]
+
+        if operator == "+":
+            calc_result = operand_one + operand_two
+        elif operator == "-":
+            calc_result = operand_one - operand_two
+        elif operator == "*":
+            calc_result = operand_one * operand_two
+        elif operator == "/":
+            calc_result = operand_one / operand_two
+
+        serializer.save(result = calc_result)
+
 
 class OperationRetrieveDestroyAPIView(generics.RetrieveDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
