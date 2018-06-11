@@ -7,5 +7,5 @@ class OperationSerializer(ModelSerializer):
 
     class Meta:
         model = Operation
-        fields = ["operand_one", "operator", "operand_two", "result", "owner"]
+        fields = ["id", "operand_one", "operator", "operand_two", "result", "owner"]
         read_only_fields = ["owner"]

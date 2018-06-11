@@ -16,8 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from calc_app.views import OperationListCreateAPIView, OperationRetrieveDestroyAPIView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
+    path('operations/', OperationListCreateAPIView.as_view()),
+    path('opertaions/<int:pk>', OperationRetrieveDestroyAPIView.as_view()),
 ]
