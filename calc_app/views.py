@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from rest_framework import generics
+from rest_framework.mixins import ListModelMixin
 
 from calc_app.permissions import IsOwnerOrReadOnly
 from calc_app.models import Operation
@@ -8,8 +9,12 @@ from calc_app.serializer import OperationSerializer
 
 # Create your views here.
 class OperationListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Operation.objects.all()
+    #queryset = Operation.objects.all()
     serializer_class = OperationSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Operation.objects.filter(owner=user)
 
     def perform_create(self, serializer):
         serializer.save(owner = self.request.user)
